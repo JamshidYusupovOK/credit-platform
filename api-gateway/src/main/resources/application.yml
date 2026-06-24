@@ -1,0 +1,52 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: api-gateway
+  main:
+    web-application-type: reactive
+  autoconfigure:
+    exclude:
+      - org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration
+      - org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration
+      - org.springframework.boot.autoconfigure.amqp.RabbitAutoConfiguration
+  data:
+    redis:
+      host: localhost
+      port: 6379
+  cloud:
+    gateway:
+      routes:
+        - id: user-service
+          uri: lb://user-service
+          predicates:
+            - Path=/api/users/**
+        - id: client-service
+          uri: lb://client-service
+          predicates:
+            - Path=/api/clients/**
+        - id: credit-service
+          uri: lb://credit-service
+          predicates:
+            - Path=/api/credits/**
+        - id: scoring-service
+          uri: lb://scoring-service
+          predicates:
+            - Path=/api/scoring/**
+        - id: status-service
+          uri: lb://status-service
+          predicates:
+            - Path=/api/statuses/**
+        - id: file-service
+          uri: lb://file-service
+          predicates:
+            - Path=/api/files/**
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+
+jwt:
+  secret: 404E635266556A586E3272357538782F413F4428472B4B6250645367566B5970
