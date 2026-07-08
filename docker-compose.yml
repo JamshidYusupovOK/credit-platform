@@ -40,6 +40,19 @@ services:
     volumes:
       - postgres_users_data:/var/lib/postgresql/data
 
+  postgres-clients:
+    image: postgres:16-alpine
+    container_name: postgres-clients
+    ports:
+      - "5434:5432"
+    environment:
+      POSTGRES_DB: clients_db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    volumes:
+      - postgres_clients_data:/var/lib/postgresql/data
+
 volumes:
   minio_data:
   postgres_users_data:
+  postgres_clients_data:
