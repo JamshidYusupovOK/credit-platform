@@ -51,8 +51,20 @@ services:
       POSTGRES_PASSWORD: postgres
     volumes:
       - postgres_clients_data:/var/lib/postgresql/data
+  postgres-credits:
+    image: postgres:16-alpine
+    container_name: postgres-credits
+    ports:
+      - "5435:5432"
+    environment:
+      POSTGRES_DB: credits_db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    volumes:
+      - postgres_credits_data:/var/lib/postgresql/data
 
 volumes:
   minio_data:
   postgres_users_data:
   postgres_clients_data:
+  postgres_credits_data:
