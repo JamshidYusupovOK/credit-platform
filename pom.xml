@@ -19,7 +19,7 @@
         <module>eureka-server</module>
         <module>api-gateway</module>
         <module>user-service</module>
-        <module>user-service</module>
+        <module>client-service</module>
     </modules>
 
     <properties>
